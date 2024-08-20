@@ -1,4 +1,3 @@
-# https://chatgpt.com/share/7aaef17c-4fdd-44b1-909c-e9f1b023d07d
 services:
   nestjs_api:
     build: 

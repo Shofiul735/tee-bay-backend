@@ -20,8 +20,7 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  const logger = app.get(CustomLoggerService);
-  app.useGlobalFilters(new HttpExceptionFilter(logger));
+  app.useGlobalFilters(new HttpExceptionFilter(new CustomLoggerService()));
 
   const port = process.env.PORT || 3000;
   await app.listen(port, () => {

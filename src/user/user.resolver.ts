@@ -1,27 +1,29 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { UserType } from './Graphql/user.type';
 import { UserService } from './user.service';
-import { GetUserType } from './Graphql/get-user.type';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { LoginUser } from './Graphql/login-user.type';
+import { LoginUserType } from './Graphql/login-user.type';
 import { LoginUserDto } from './dtos/login-user.dto';
+import { GetUserType } from './Graphql/get-user.type';
 
 @Resolver(() => UserType)
 export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Query(() => GetUserType)
-  async getUserById(@Args('id') id: string): Promise<UserType> {
+  async getUserById(@Args('id') id: string): Promise<GetUserType> {
     return await this.userService.findUserById(id);
   }
 
-  @Query(() => LoginUser)
-  async loginUser(@Args('loginInfo') loginInfo: LoginUserDto) {
+  @Query(() => GetUserType)
+  async loginUser(
+    @Args('loginInfo') loginInfo: LoginUserDto,
+  ): Promise<LoginUserType> {
     return await this.userService.loginUser(loginInfo);
   }
 
   @Mutation(() => GetUserType)
-  createUser(@Args('createUser') createUser: CreateUserDto) {
-    return this.userService.createUser(createUser);
+  async createUser(@Args('user') user: CreateUserDto): Promise<GetUserType> {
+    return await this.userService.createUser(user);
   }
 }

@@ -5,11 +5,10 @@ import { Prisma } from '@prisma/client';
 import { randomBytes, scrypt } from 'crypto';
 import { promisify } from 'util';
 import { LoginUserDto } from './dtos/login-user.dto';
-import { emit } from 'process';
 import { JwtService } from '@nestjs/jwt';
-import { LoginUser } from './Graphql/login-user.type';
 import { plainToClass } from 'class-transformer';
-
+import { UserType } from './Graphql/user.type';
+import { LoginUserType } from './Graphql/login-user.type';
 @Injectable({
   scope: Scope.REQUEST,
 })
@@ -49,7 +48,7 @@ export class UserService {
     const accesToken = await this.jwtService.signAsync(payload);
 
     const payloadDto = plainToClass(
-      LoginUser,
+      LoginUserType,
       {
         ...user,
         jwtToken: accesToken,
@@ -58,16 +57,19 @@ export class UserService {
         excludeExtraneousValues: true,
       },
     );
-
+    console.log(user);
+    console.log(payload);
     return payloadDto;
   }
 
   async createUser(create: Prisma.UserCreateInput) {
     const password = await this.passwordHashing(create.password);
     create.password = password;
-    return await this.dataService.user.create({
+
+    const newUser = await this.dataService.user.create({
       data: create,
     });
+    return newUser;
   }
 
   private async passwordHashing(password: string) {

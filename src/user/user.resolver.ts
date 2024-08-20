@@ -15,10 +15,13 @@ export class UserResolver {
     return await this.userService.findUserById(id);
   }
 
-  @Mutation(() => GetUserType)
-  createUser(@Args('createUser') createUser:CreateUserDto) {
-    return this.userService.createUser(createUser);
+  @Query(() => LoginUser)
+  async loginUser(@Args('loginInfo') loginInfo: LoginUserDto) {
+    return await this.userService.loginUser(loginInfo);
   }
 
-  
+  @Mutation(() => GetUserType)
+  createUser(@Args('createUser') createUser: CreateUserDto) {
+    return this.userService.createUser(createUser);
+  }
 }

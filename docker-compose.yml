@@ -1,0 +1,29 @@
+# https://chatgpt.com/share/7aaef17c-4fdd-44b1-909c-e9f1b023d07d
+services:
+  nestjs_api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '4000:4000'
+    environment:
+      - PORT=4000
+      - NODE_ENV=dev
+      - DATABASE_URL=postgres://shofiul:postgres@postgres_db:5432/tee-bay
+      - JWT_SECRET=SUPER_DUPER_NOT_HIGHLY_SECURE_LONG_JWT_KEY
+      - ALLOW_ORIGIN=localhost:3000
+    volumes:
+      - ./src:/app/src
+      - - /app/node_modules # Prevents overwriting node_modules in the container
+    depends_on:
+      - postgres_db
+    entrypoint: ["sh", "-c", "prisma migrate deploy && npm run start:dev"]
+
+  postgres_db:
+    image: postgres:16
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=shofiul
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=tee-bay

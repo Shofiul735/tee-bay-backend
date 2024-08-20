@@ -15,6 +15,8 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter(logger));
 
   const port = process.env.PORT || 3000;
-  await app.listen(port);
+  await app.listen(port, () => {
+    console.log(`Server is up on port: ${port}`);
+  });
 }
 bootstrap();

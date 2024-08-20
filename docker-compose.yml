@@ -14,7 +14,7 @@ services:
       - ALLOW_ORIGIN=localhost:3000
     volumes:
       - ./src:/app/src
-      - - /app/node_modules # Prevents overwriting node_modules in the container
+      - /app/node_modules # Prevents overwriting node_modules in the container
     depends_on:
       - postgres_db
     entrypoint: ["sh", "-c", "prisma migrate deploy && npm run start:dev"]

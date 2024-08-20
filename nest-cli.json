@@ -15,6 +15,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/logger/tsconfig.lib.json"
       }
+    },
+    "prima": {
+      "type": "library",
+      "root": "libs/prima",
+      "entryFile": "index",
+      "sourceRoot": "libs/prima/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/prima/tsconfig.lib.json"
+      }
     }
   }
 }

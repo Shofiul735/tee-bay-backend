@@ -25,11 +25,19 @@ input LoginUserDto {
   password: String!
 }
 
+type LoginUserType {
+  email: String!
+  firstName: String!
+  id: ID!
+  jwtToken: String!
+  lastName: String!
+}
+
 type Mutation {
   createUser(user: CreateUserDto!): GetUserType!
 }
 
 type Query {
   getUserById(id: String!): GetUserType!
-  loginUser(loginInfo: LoginUserDto!): GetUserType!
+  loginUser(loginUser: LoginUserDto!): LoginUserType!
 }

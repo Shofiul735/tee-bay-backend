@@ -15,11 +15,11 @@ export class UserResolver {
     return await this.userService.findUserById(id);
   }
 
-  @Query(() => GetUserType)
+  @Query(() => LoginUserType)
   async loginUser(
-    @Args('loginInfo') loginInfo: LoginUserDto,
-  ): Promise<LoginUserType> {
-    return await this.userService.loginUser(loginInfo);
+    @Args('loginUser') loginUser: LoginUserDto,
+  ): Promise<GetUserType> {
+    return this.userService.loginUser(loginUser);
   }
 
   @Mutation(() => GetUserType)

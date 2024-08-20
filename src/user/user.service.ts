@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { plainToClass } from 'class-transformer';
 import { UserType } from './Graphql/user.type';
 import { LoginUserType } from './Graphql/login-user.type';
+import { GetUserType } from './Graphql/get-user.type';
 @Injectable({
   scope: Scope.REQUEST,
 })
@@ -34,7 +35,10 @@ export class UserService {
         email: loginInfo.email,
       },
     });
+    console.log(user);
+
     if (!this.matchPassword(user.password, loginInfo.password)) {
+      console.log('Not matched');
       throw new BadRequestException(
         `Wrong password. email: ${loginInfo.email}`,
       );
@@ -46,20 +50,12 @@ export class UserService {
     };
 
     const accesToken = await this.jwtService.signAsync(payload);
+    const userDto = plainToClass(GetUserType, {
+      ...user,
+      jwtToken: accesToken,
+    });
 
-    const payloadDto = plainToClass(
-      LoginUserType,
-      {
-        ...user,
-        jwtToken: accesToken,
-      },
-      {
-        excludeExtraneousValues: true,
-      },
-    );
-    console.log(user);
-    console.log(payload);
-    return payloadDto;
+    return userDto;
   }
 
   async createUser(create: Prisma.UserCreateInput) {

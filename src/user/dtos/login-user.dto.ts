@@ -9,7 +9,6 @@ export class LoginUserDto {
   email: string;
 
   @Field()
-  @IsEmail()
   @IsNotEmpty()
   password: string;
 }

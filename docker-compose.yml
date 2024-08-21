@@ -17,7 +17,7 @@ services:
       - ./prisma:/app/prisma
     depends_on:
       - postgres_db
-    entrypoint: ["sh", "-c", "prisma migrate deploy && npm run start:dev"]
+    entrypoint: ["sh", "-c", "prisma migrate deploy && npx prisma db seed && npm run start:dev"]
 
   postgres_db:
     image: postgres:16

@@ -22,3 +22,7 @@ model User {
   phoneNumber String @db.VarChar(15)
   password    String @db.VarChar(255)
 }
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique @db.VarChar(50)
+}

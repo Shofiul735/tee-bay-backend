@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type CategoryType {
+  id: Int!
+  name: String!
+}
+
 input CreateUserDto {
   address: String!
   email: String!
@@ -59,5 +64,6 @@ type ProductType {
 }
 
 type Query {
+  getAllCategory: [CategoryType!]!
   getUserById(id: String!): GetUserType!
 }

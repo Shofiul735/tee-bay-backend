@@ -7,9 +7,7 @@ import { promisify } from 'util';
 import { LoginUserDto } from './dtos/login-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { plainToClass } from 'class-transformer';
-import { UserType } from './Graphql/user.type';
 import { LoginUserType } from './Graphql/login-user.type';
-import { GetUserType } from './Graphql/get-user.type';
 @Injectable({
   scope: Scope.REQUEST,
 })
@@ -35,7 +33,6 @@ export class UserService {
         email: loginInfo.email,
       },
     });
-    console.log(user);
 
     if (!this.matchPassword(user.password, loginInfo.password)) {
       console.log('Not matched');
@@ -50,7 +47,7 @@ export class UserService {
     };
 
     const accesToken = await this.jwtService.signAsync(payload);
-    const userDto = plainToClass(GetUserType, {
+    const userDto = plainToClass(LoginUserType, {
       ...user,
       jwtToken: accesToken,
     });

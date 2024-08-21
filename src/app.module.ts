@@ -13,6 +13,7 @@ import { join } from 'path';
       playground: true,
       debug: true,
       sortSchema: true,
+      context: ({ req, res }) => ({ req, res }),
     }),
     PrismaModule,
     UserModule,

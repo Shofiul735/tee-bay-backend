@@ -34,8 +34,28 @@ type LoginUserType {
 }
 
 type Mutation {
+  addProduct(product: ProductInpurtType!): ProductType!
   createUser(user: CreateUserDto!): GetUserType!
   loginUser(loginUser: LoginUserDto!): LoginUserType!
+}
+
+input ProductInpurtType {
+  categoriIds: [Int!]!
+  price: Float!
+  productTitle: String!
+  rentPrice: Float
+  rentUnit: String
+  textureDescription: String
+}
+
+type ProductType {
+  categoriIds: [Int!]!
+  id: Int!
+  price: Float!
+  productTitle: String!
+  rentPrice: Float
+  rentUnit: String
+  textureDescription: String
 }
 
 type Query {

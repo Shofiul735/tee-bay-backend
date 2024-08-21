@@ -10,7 +10,7 @@ services:
       - NODE_ENV=dev
       - DATABASE_URL=postgres://shofiul:postgres@postgres_db:5432/tee-bay
       - JWT_SECRET=SUPER_DUPER_NOT_HIGHLY_SECURE_LONG_JWT_KEY
-      - ALLOW_ORIGIN=localhost:3000
+      - ALLOW_ORIGIN=http://localhost:3000
     volumes:
       - ./src:/app/src
       - /app/node_modules # Prevents overwriting node_modules in the container

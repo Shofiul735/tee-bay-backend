@@ -18,7 +18,7 @@ export class UserResolver {
     return await this.userService.findUserById(id);
   }
 
-  @Query(() => LoginUserType)
+  @Mutation(() => LoginUserType)
   async loginUser(
     @Args('loginUser') loginUser: LoginUserDto,
     @Context() context,

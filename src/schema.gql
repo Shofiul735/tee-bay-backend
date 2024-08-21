@@ -35,9 +35,9 @@ type LoginUserType {
 
 type Mutation {
   createUser(user: CreateUserDto!): GetUserType!
+  loginUser(loginUser: LoginUserDto!): LoginUserType!
 }
 
 type Query {
   getUserById(id: String!): GetUserType!
-  loginUser(loginUser: LoginUserDto!): LoginUserType!
 }

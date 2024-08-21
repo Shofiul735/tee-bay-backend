@@ -5,6 +5,7 @@ import { PrismaModule } from '@app/prisma/prisma.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { ProductModule } from './product/product.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ProductModule } from './product/product.module';
     PrismaModule,
     UserModule,
     ProductModule,
+    CategoryModule,
   ],
 })
 export class AppModule {}
